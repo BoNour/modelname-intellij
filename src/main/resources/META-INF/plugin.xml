@@ -1,0 +1,39 @@
+<idea-plugin>
+    <id>io.whizi.modelname</id>
+    <name>Model Name</name>
+    <vendor url="https://whizi.io">Whizi</vendor>
+
+    <description><![CDATA[
+<p>Tells you what an AI model ID actually means. Put the caret on (or select) something like
+<code>claude-opus-4-1-20250805</code>, <code>gpt-4.1-mini</code> or
+<code>meta-llama/llama-3.3-70b-instruct:free</code>, right click, and pick <b>Parse AI Model ID</b>.</p>
+<p>You get the vendor, family, version, size, release date and tags:</p>
+<ul>
+  <li><code>claude-3-5-sonnet-20241022</code> &rarr; Anthropic &middot; Claude Sonnet &middot; 3.5, date 2024-10-22</li>
+  <li><code>qwen/qwen3-235b-a22b</code> &rarr; Alibaba &middot; Qwen &middot; 3, size 235b-a22b</li>
+  <li><code>Gemini 3.1 Pro Preview</code> &rarr; Google &middot; Gemini Pro &middot; 3.1, preview</li>
+</ul>
+<p>It reads API IDs and display names the same way, so old and new names land in the same family.
+Works offline, no API keys, no network calls.</p>
+<p>The naming rules come from the same parser behind the
+<a href="https://whizi.io/models/">Whizi AI model directory</a>. To see what each model costs per message,
+check the <a href="https://whizi.io/tools/model-cost-index">AI model cost index</a>.
+Source: <a href="https://github.com/BoNour/modelname-intellij">github.com/BoNour/modelname-intellij</a>.</p>
+]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Model Name" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="io.whizi.modelname.ParseSelection"
+                class="io.whizi.modelname.ParseSelectionAction"
+                text="Parse AI Model ID"
+                description="Show the vendor, family and version of the AI model ID under the caret">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
